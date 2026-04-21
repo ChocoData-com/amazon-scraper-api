@@ -8,7 +8,7 @@ This repo is deliberately minimal. Here's what will break, when, and why.
 
 **Frequency:** common from datacenter IPs, occasional from residential. The examples in this repo will print `error: Amazon showed a robot check` and exit 1.
 
-**Fix (partial):** use a residential-IP proxy via the `PROXY_URL` env var. Even then, Amazon serves robot pages ~5–15% of the time on residential IPs. You'd need retry logic + multi-tier proxy failover to get this rate down.
+**Fix (partial):** use a residential-IP proxy via the `PROXY_URL` env var. Even then, Amazon serves robot pages ~5-15% of the time on residential IPs. You'd need retry logic + multi-tier proxy failover to get this rate down.
 
 **Fix (proper):** the [managed service](https://amazonscraperapi.com) auto-detects robot pages and retries through escalating proxy tiers (datacenter → residential → premium stealth), transparently.
 
@@ -26,12 +26,12 @@ Amazon's DOM changes roughly monthly. Class names like `.a-price-whole` drift or
 
 This repo tries three domains (`com`, `de`, `co.uk`). It will **not** work well on:
 
-- `amazon.co.jp` — price uses `¥` prefix, different layout
-- `amazon.com.br` — Portuguese labels, different price format
-- `amazon.in` — `₹` currency, decimal separator quirks
-- `amazon.com.au` — GST-inclusive prices, different review display
-- Amazon Fresh / Whole Foods listings — completely different templates
-- Electronics vs books vs grocery — Amazon uses different product templates
+- `amazon.co.jp` - price uses `¥` prefix, different layout
+- `amazon.com.br` - Portuguese labels, different price format
+- `amazon.in` - `₹` currency, decimal separator quirks
+- `amazon.com.au` - GST-inclusive prices, different review display
+- Amazon Fresh / Whole Foods listings - completely different templates
+- Electronics vs books vs grocery - Amazon uses different product templates
 
 **Fix here:** contribute marketplace-specific parsing if you're motivated.
 
@@ -49,20 +49,20 @@ If you run the Python/Node example in a tight loop from one IP, Amazon will star
 
 Amazon personalizes prices, recommendations, and even product details by user cohort. A "clean" proxy (no cookies, fresh IP) sees different content than a logged-in US Prime member. The examples get the "clean" view, which is often what you want for competitive intelligence but **not** what an actual customer sees.
 
-**Nothing to fix here at this repo's level** — personalization is a property of Amazon's CDN, not your scraper. Managed services can't bypass it either; they just serve the "clean" view consistently.
+**Nothing to fix here at this repo's level** - personalization is a property of Amazon's CDN, not your scraper. Managed services can't bypass it either; they just serve the "clean" view consistently.
 
 ## Things that are fundamentally out of scope
 
 This repo will never implement (PRs adding them will be politely closed):
 
-- **Structured review extraction** — individual review text, helpful-count, verified-purchase flag, 1-star vs 5-star breakdowns
-- **Variant tree** — all color/size/storage ASINs and their prices
-- **A+ content** — the rich description blocks sellers pay for
-- **Buy Box scraping** — who owns the buybox, seller ratings, prime eligibility per offer
-- **Offer listings** — the "other sellers on Amazon" sidebar
-- **Spec tables** — the product information table at the bottom of the listing
-- **Q&A section** — customer questions and answers
-- **Sponsored placements** — ads vs organic in search results
+- **Structured review extraction** - individual review text, helpful-count, verified-purchase flag, 1-star vs 5-star breakdowns
+- **Variant tree** - all color/size/storage ASINs and their prices
+- **A+ content** - the rich description blocks sellers pay for
+- **Buy Box scraping** - who owns the buybox, seller ratings, prime eligibility per offer
+- **Offer listings** - the "other sellers on Amazon" sidebar
+- **Spec tables** - the product information table at the bottom of the listing
+- **Q&A section** - customer questions and answers
+- **Sponsored placements** - ads vs organic in search results
 - **Category browsing / bestseller scraping**
 - **Async job queueing with webhook callback**
 - **TLS fingerprinting / JA3 impersonation**

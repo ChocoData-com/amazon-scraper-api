@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Minimal Amazon product scraper — Python version.
+Minimal Amazon product scraper - Python version.
 
 WHAT THIS DOES
     Fetches the Amazon product detail page for a given ASIN and extracts
@@ -47,7 +47,7 @@ def main() -> int:
     # Examples:
     #   export PROXY_URL=http://user:pass@gate.provider.com:8000
     #   export PROXY_URL=http://user:pass_country-US@rp.provider.com:1000
-    # If unset, requests go direct — they will be blocked on ~30% of
+    # If unset, requests go direct - they will be blocked on ~30% of
     # attempts from a datacenter IP. This is why you need a proxy.
     proxy_url = os.environ.get("PROXY_URL")
     proxies = {"http": proxy_url, "https": proxy_url} if proxy_url else None
@@ -58,7 +58,7 @@ def main() -> int:
             url,
             proxies=proxies,
             headers={
-                # Anything more realistic than requests' default UA helps — a little.
+                # Anything more realistic than requests' default UA helps - a little.
                 "User-Agent": (
                     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                     "AppleWebKit/605.1.15 (KHTML, like Gecko) "
@@ -69,12 +69,12 @@ def main() -> int:
             timeout=30,
         )
     except requests.RequestException as e:
-        print(f"error: network failure — {e}", file=sys.stderr)
+        print(f"error: network failure - {e}", file=sys.stderr)
         return 1
 
     if not resp.ok:
         print(
-            f"error: HTTP {resp.status_code} — Amazon likely blocked us. "
+            f"error: HTTP {resp.status_code} - Amazon likely blocked us. "
             "Try a different proxy, or use the managed API at https://amazonscraperapi.com",
             file=sys.stderr,
         )

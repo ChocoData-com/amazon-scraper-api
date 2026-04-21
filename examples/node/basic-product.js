@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Minimal Amazon product scraper — Node.js version.
+ * Minimal Amazon product scraper - Node.js version.
  *
  * WHAT THIS DOES
  *   Fetches the Amazon product detail page for a given ASIN and
@@ -39,7 +39,7 @@ if (!asin) {
 // Examples:
 //   export PROXY_URL=http://user:pass@gate.provider.com:8000
 //   export PROXY_URL=http://user:pass_country-US@rp.provider.com:1000
-// If unset, requests go direct — they will be blocked on ~30% of attempts
+// If unset, requests go direct - they will be blocked on ~30% of attempts
 // from a datacenter IP. This is why you need a proxy.
 const proxyUrl = process.env.PROXY_URL;
 const agent = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined;
@@ -47,7 +47,7 @@ const agent = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined;
 const url = `https://www.amazon.${domain}/dp/${asin}`;
 const res = await fetch(url, {
   agent,
-  // Anything more realistic than Node's default UA helps — a little.
+  // Anything more realistic than Node's default UA helps - a little.
   headers: {
     'User-Agent':
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
@@ -56,7 +56,7 @@ const res = await fetch(url, {
 });
 
 if (!res.ok) {
-  console.error(`error: HTTP ${res.status} — Amazon likely blocked us. Try a different proxy, or use the managed API at https://amazonscraperapi.com`);
+  console.error(`error: HTTP ${res.status} - Amazon likely blocked us. Try a different proxy, or use the managed API at https://amazonscraperapi.com`);
   process.exit(1);
 }
 
@@ -70,7 +70,7 @@ if ($('#captchacharacters').length || html.includes('Enter the characters you se
 }
 
 // These selectors are correct as of 2026-04 but Amazon rewrites them often.
-// If any return empty, don't be surprised — that's the whole point of the README.
+// If any return empty, don't be surprised - that's the whole point of the README.
 const title = $('#productTitle').text().trim();
 const priceWhole = $('.a-price .a-price-whole').first().text().replace(/[^0-9]/g, '');
 const priceFraction = $('.a-price .a-price-fraction').first().text().replace(/[^0-9]/g, '');
